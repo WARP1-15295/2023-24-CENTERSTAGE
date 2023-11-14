@@ -13,7 +13,9 @@ public class RobotMap {
     public static DcMotor leftFrontDrive = null;
     public static DcMotor rightFrontDrive = null;
     public static DcMotor leftBackDrive = null;
-    public static Dcmotor rightBackDrive = null;
+    public static DcMotor rightBackDrive = null;
+
+    public static DcMotor liftMotor = null;
 
     public static final int WHEEL_DIAMETER = 101; //VEX 4 INCH
     public static final double MILLIMETER_TO_INCHES_CONSTANT = 25.4;
@@ -38,10 +40,14 @@ public class RobotMap {
         leftBackDrive = hardwareMap.get(DcMotor.class, "leftBackDrive");
         rightBackDrive = hardwareMap.get(DcMotor.class, "rightBackDrive");
 
+        liftMotor = hardwareMap.get(DcMotor.class, "liftMotor");
+
         leftFrontDrive.setDirection(DcMotor.Direction.FORWARD);
         rightFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         leftBackDrive.setDirection(DcMotor.Direction.FORWARD);
         rightBackDrive.setDirection(DcMotor.Direction.REVERSE);
+
+        liftMotor.setDirection(DcMotor.Direction.REVERSE);
 
         // Reset motor encoders
         leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -49,10 +55,16 @@ public class RobotMap {
         leftBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCONDER);
 
+        liftMotor.setMOde(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
 
         // Set motor default run mode to use encoders
-        leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
     }
 

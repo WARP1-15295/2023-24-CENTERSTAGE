@@ -50,6 +50,15 @@ public class TeleOpControl extends OpMode {
             robotMap.rightBackDrive.setPower(0.0);
         }
 
+        //GAMEPAD 2
+        if (Math.abs(gamepad2.right_stick_y) > rightStickDeadzone) {
+            robotMap.liftMotor.setPower(-gamepad2.right_stick_y);
+        } else {
+            robotMap.liftMotor.setPower(0);
+        }
+
+
+
     }
     @Override
     public void stop () {
