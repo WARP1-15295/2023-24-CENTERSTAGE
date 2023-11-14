@@ -10,14 +10,15 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class RobotMap {
 
     /* Public OpMode members. */
-    public static DcMotor leftDrive = null;
-    public static DcMotor rightDrive = null;
+    public static DcMotor leftFrontDrive = null;
+    public static DcMotor rightFrontDrive = null;
+    public static DcMotor leftBackDrive = null;
+    public static Dcmotor rightBackDrive = null;
 
     public static final int WHEEL_DIAMETER = 101; //VEX 4 INCH
     public static final double MILLIMETER_TO_INCHES_CONSTANT = 25.4;
 
     public static final double WHEEL_CIRCUMFERENCE_INCHES = (Math.PI * WHEEL_DIAMETER) / MILLIMETER_TO_INCHES_CONSTANT; // ~ 11.13 in. IN 1120 ticks (1 Rev)
-    public static final double COUNTS_PER_INCH = (TICKS_PER_REV * SPROCKET_RATIO) / WHEEL_CIRCUMFERENCE_INCHES; //DRIVETRAIN's COUNTS PER INCH
 
     /* local OpMode members. */
     HardwareMap hardwareMap = null;
@@ -32,15 +33,21 @@ public class RobotMap {
         // Save reference to Hardware map
         hardwareMap = hwMap;
 
-        leftDrive  = hardwareMap.get(DcMotor.class, "leftDrive");
-        rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
+        leftFrontDrive  = hardwareMap.get(DcMotor.class, "leftFrontDrive");
+        rightFrontDrive = hardwareMap.get(DcMotor.class, "rightFrontDrive");
+        leftBackDrive = hardwareMap.get(DcMotor.class, "leftBackDrive");
+        rightBackDrive = hardwareMap.get(DcMotor.class, "rightBackDrive");
 
-        leftDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightDrive.setDirection(DcMotor.Direction.FORWARD);
+        leftFrontDrive.setDirection(DcMotor.Direction.FORWARD);
+        rightFrontDrive.setDirection(DcMotor.Direction.REVERSE);
+        leftBackDrive.setDirection(DcMotor.Direction.FORWARD);
+        rightBackDrive.setDirection(DcMotor.Direction.REVERSE);
 
         // Reset motor encoders
-        leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCONDER);
 
 
         // Set motor default run mode to use encoders

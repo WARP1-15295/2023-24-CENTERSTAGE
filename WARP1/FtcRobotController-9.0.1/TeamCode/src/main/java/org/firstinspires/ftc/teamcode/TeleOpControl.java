@@ -19,23 +19,35 @@ public class TeleOpControl extends OpMode {
     }
     public
     @Override
-    void start() {
-        elapsedTime.reset();
+    void start() { elapsedTime.reset();
     }
     @Override
     public void loop() {
         //GAMEPAD 1
-        double strafe = gamepad1.left_stick_x;
-        double course = -gamepad1.left_stick_y;
-        double rotate = (0.533333 * Math.pow(gamepad1.right_stick_x, 3) + 0.466666 * gamepad1.right_stick_x);
+        double degreesToRads45 = -Math.PI/4;
+        double leftStickDeadZone = 0.1;
+        double rightStickDeadZone = 0.1;
+
+        double x = gamepad1.left_stick_x * Math.cos(degreesToRads45) + gamepad1.left_stick_y * Math.sin(degreesToRads45);
+        double y = -gamepad1.left_stick_y * Math.cos(degreesToRads45) + gamepad1.left_stick_x * Math.sin(degreesToRads45);
+        double rotate = gamepad1.right_stick_x;
 
 
-        if (Math.abs(rotate) > 0.1) {
-            robotMap.leftDrive.setPower(rotate);
-            robotMap.rightDrive.setPower(-rotate);
+        if (Math.abs(rotate) > rightStickDeadZone) {
+            robotMap.leftFrontDrive.setPower(rotate);
+            robotMap.leftBackDrive.setPower(rotate);
+            robotMap.rightFrontDrive.setPower(-rotate);
+            robotMap.rightBackDrive.setPower(-rotate);
+        } else if(Math.abs(x) > leftStickDeadzone || Math.abs(y) > leftStickDeadzone){
+            robotMap.leftFrontDrive.setPower(x);
+            robotMap.leftBackDrive.setPower(y);
+            robotMap.rightFrontDrive.setPower(y);
+            robotMap.rightBackDrive.setPower(x);
         } else {
-            robotMap.leftDrive.setPower(course);
-            robotMap.rightDrive.setPower(course);
+            robotMap.leftFrontDrive.setPower(0.0);
+            robotMap.leftBackDrive.setPower(0.0);
+            robotMap.rightFrontDrive.setPower(0.0);
+            robotMap.rightBackDrive.setPower(0.0);
         }
 
     }
