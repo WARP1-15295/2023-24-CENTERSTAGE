@@ -33,16 +33,16 @@ public class RobotMap {
         // Save reference to Hardware map
         hardwareMap = hwMap;
 
-        leftFrontDrive  = hardwareMap.get(DcMotor.class, "leftFrontDrive");
-        rightFrontDrive = hardwareMap.get(DcMotor.class, "rightFrontDrive");
-        leftBackDrive = hardwareMap.get(DcMotor.class, "leftBackDrive");
-        rightBackDrive = hardwareMap.get(DcMotor.class, "rightBackDrive");
+        leftFrontDrive = hardwareMap.get(DcMotor.class, "leftFrontDrive"); // 0
+        rightFrontDrive = hardwareMap.get(DcMotor.class, "rightFrontDrive"); // 2
+        leftBackDrive = hardwareMap.get(DcMotor.class, "leftBackDrive"); // 1
+        rightBackDrive = hardwareMap.get(DcMotor.class, "rightBackDrive"); // 3
 
 
-        leftFrontDrive.setDirection(DcMotor.Direction.FORWARD);
+        leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         rightFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         leftBackDrive.setDirection(DcMotor.Direction.FORWARD);
-        rightBackDrive.setDirection(DcMotor.Direction.REVERSE);
+        rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
 
         // Reset motor encoders
         leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
