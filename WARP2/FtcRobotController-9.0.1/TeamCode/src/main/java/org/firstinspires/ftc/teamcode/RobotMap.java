@@ -15,8 +15,6 @@ public class RobotMap {
     public static DcMotor leftBackDrive = null;
     public static DcMotor rightBackDrive = null;
 
-    public static DcMotor liftMotor = null;
-
     public static final int WHEEL_DIAMETER = 101; //VEX 4 INCH
     public static final double MILLIMETER_TO_INCHES_CONSTANT = 25.4;
 
@@ -40,22 +38,18 @@ public class RobotMap {
         leftBackDrive = hardwareMap.get(DcMotor.class, "leftBackDrive");
         rightBackDrive = hardwareMap.get(DcMotor.class, "rightBackDrive");
 
-        liftMotor = hardwareMap.get(DcMotor.class, "liftMotor");
 
         leftFrontDrive.setDirection(DcMotor.Direction.FORWARD);
         rightFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         leftBackDrive.setDirection(DcMotor.Direction.FORWARD);
         rightBackDrive.setDirection(DcMotor.Direction.REVERSE);
 
-        liftMotor.setDirection(DcMotor.Direction.REVERSE);
-
         // Reset motor encoders
         leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCONDER);
+        rightBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        liftMotor.setMOde(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
         // Set motor default run mode to use encoders
@@ -64,14 +58,6 @@ public class RobotMap {
         leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
     }
-
-    public int encoderConvert(double inches) {
-        //The RUT_TO_POSITION function of DcMotor requires an int to be passed in. We cast the answer of this line down to an int to satisfy this.
-        int units = (int) Math.round(COUNTS_PER_INCH * inches);
-        return units;
-    }
-
 }
