@@ -9,22 +9,27 @@ public class TeleOpControl extends OpMode {
     // Declare OpMode members here
     private ElapsedTime elapsedTime = new ElapsedTime();
     RobotMap robotMap = new RobotMap();
+
     @Override
     public void init() {
         telemetry.addData("Status", "Initialized");
         robotMap.init(hardwareMap);
     }
+
     @Override
     public void init_loop() {
     }
+
     public
     @Override
-    void start() { elapsedTime.reset();
+    void start() {
+        elapsedTime.reset();
     }
+
     @Override
     public void loop() {
         //GAMEPAD 1
-        double degreesToRads45 = -Math.PI/4;
+        double degreesToRads45 = -Math.PI / 4;
         double leftStickDeadZone = 0.1;
         double rightStickDeadZone = 0.1;
 
@@ -38,7 +43,7 @@ public class TeleOpControl extends OpMode {
             robotMap.leftBackDrive.setPower(rotate);
             robotMap.rightFrontDrive.setPower(-rotate);
             robotMap.rightBackDrive.setPower(-rotate);
-        } else if(Math.abs(x) > leftStickDeadzone || Math.abs(y) > leftStickDeadzone){
+        } else if (Math.abs(x) > leftStickDeadZone || Math.abs(y) > leftStickDeadZone) {
             robotMap.leftFrontDrive.setPower(x);
             robotMap.leftBackDrive.setPower(y);
             robotMap.rightFrontDrive.setPower(y);
@@ -51,9 +56,8 @@ public class TeleOpControl extends OpMode {
         }
 
     }
+
     @Override
-    public void stop () {
-        robotMap.clawMotor.setPower(0.0);
-        robotMap.clawMotor.setPower(0.0);
+    public void stop() {
     }
 }

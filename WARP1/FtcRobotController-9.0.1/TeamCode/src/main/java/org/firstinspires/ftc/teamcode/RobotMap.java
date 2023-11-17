@@ -1,10 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class RobotMap {
@@ -13,7 +10,7 @@ public class RobotMap {
     public static DcMotor leftFrontDrive = null;
     public static DcMotor rightFrontDrive = null;
     public static DcMotor leftBackDrive = null;
-    public static Dcmotor rightBackDrive = null;
+    public static DcMotor rightBackDrive = null;
 
     public static final int WHEEL_DIAMETER = 101; //VEX 4 INCH
     public static final double MILLIMETER_TO_INCHES_CONSTANT = 25.4;
@@ -47,7 +44,7 @@ public class RobotMap {
         leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCONDER);
+        rightBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
         // Set motor default run mode to use encoders
@@ -55,13 +52,6 @@ public class RobotMap {
         rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-    }
-
-    public int encoderConvert(double inches) {
-        //The RUT_TO_POSITION function of DcMotor requires an int to be passed in. We cast the answer of this line down to an int to satisfy this.
-        int units = (int) Math.round(COUNTS_PER_INCH * inches);
-        return units;
     }
 
 }
