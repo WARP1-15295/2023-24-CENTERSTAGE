@@ -52,8 +52,30 @@ public class TeleOpControl extends OpMode {
 
         //GAMEPAD 2
 
+        if (Math.abs(gamepad2.left_stick_y) > rightStickDeadZone) {
+            robotMap.liftMotor1.setPower(-gamepad2.left_stick_y);
+            robotMap.liftMotor2.setPower(-gamepad2.left_stick_y);
+            robotMap.reverseLiftMotor.setPower(-gamepad2.left_stick_y);
+        } else {
+            robotMap.liftMotor1.setPower(0);
+            robotMap.liftMotor2.setPower(0);
+            robotMap.reverseLiftMotor.setPower(0);
+        }
 
+        if (gamepad2.a){
+            robotMap.intakeServo.setPosition(robotMap.INTAKE_GRAB);
+        } else if (gamepad2.b) {
+            robotMap.intakeServo.setPosition(robotMap.INTAKE_RELEASE);
+        }
 
+        if (gamepad2.dpad_down) {
+            robotMap.wristServo1.setPosition(robotMap.WRIST_SCORING);
+            robotMap.wristServo2.setPosition(robotMap.WRIST_SCORING);
+        } else if (gamepad2.dpad_up) {
+            robotMap.wristServo1.setPosition(robotMap.WRIST_STORAGE);
+            robotMap.wristServo2.setPosition(robotMap.WRIST_STORAGE);
+
+        }
 
     }
     @Override

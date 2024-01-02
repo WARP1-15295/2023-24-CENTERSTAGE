@@ -28,7 +28,7 @@ public class TeleOpControl extends OpMode {
 
     @Override
     public void loop() {
-        //GAMEPAD 1
+        //GAME-PAD 1
         double degreesToRads45 = -Math.PI / 4;
         double leftStickDeadZone = 0.1;
         double rightStickDeadZone = 0.1;
@@ -46,13 +46,19 @@ public class TeleOpControl extends OpMode {
         } else if (Math.abs(x) > leftStickDeadZone || Math.abs(y) > leftStickDeadZone) {
             robotMap.leftFrontDrive.setPower(x);
             robotMap.leftBackDrive.setPower(y);
-            robotMap.rightFrontDrive.setPower(y);
-            robotMap.rightBackDrive.setPower(x);
+            robotMap.rightFrontDrive.setPower(x);
+            robotMap.rightBackDrive.setPower(y);
         } else {
             robotMap.leftFrontDrive.setPower(0.0);
             robotMap.leftBackDrive.setPower(0.0);
             robotMap.rightFrontDrive.setPower(0.0);
             robotMap.rightBackDrive.setPower(0.0);
+        }
+
+        if (gamepad2.a){
+            robotMap.intakeServo.setPosition(robotMap.INTAKE_GRAB);
+        } else if (gamepad2.b) {
+            robotMap.intakeServo.setPosition(robotMap.INTAKE_RELEASE);
         }
 
     }
