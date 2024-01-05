@@ -25,9 +25,9 @@ public class RobotMap {
     public static Servo wristServo2 = null;
     public static Servo intakeServo = null;
 
-    public static final double INTAKE_GRAB = 1.0; //CHANGE
+    public static final double INTAKE_GRAB = 0.5; //CHANGE
     public static final double INTAKE_RELEASE = 0.0; //CHANGE
-    public static final double WRIST_SCORING = 1.0; //CHANGE
+    public static final double WRIST_SCORING = 0.7; //CHANGE
     public static final double WRIST_STORAGE = 0.0; //CHANGE
 
 

@@ -19,7 +19,11 @@ public class TeleOpControl extends OpMode {
     }
     public
     @Override
-    void start() { elapsedTime.reset();
+    void start() {
+        robotMap.intakeServo.setPosition(robotMap.INTAKE_GRAB);
+        robotMap.wristServo1.setPosition(robotMap.WRIST_STORAGE);
+        robotMap.wristServo2.setPosition(robotMap.WRIST_STORAGE);
+        elapsedTime.reset();
     }
     @Override
     public void loop() {
@@ -52,17 +56,23 @@ public class TeleOpControl extends OpMode {
 
         //GAMEPAD 2
 
-        if (Math.abs(gamepad2.left_stick_y) > rightStickDeadZone) {
-            robotMap.liftMotor1.setPower(-gamepad2.left_stick_y);
-            robotMap.liftMotor2.setPower(-gamepad2.left_stick_y);
-            robotMap.reverseLiftMotor.setPower(-gamepad2.left_stick_y);
-        } else {
+        if (gamepad2.left_stick_y < rightStickDeadZone) { // UP
+            telemetry.addData("LIFT UP", gamepad2.left_stick_y);
+            robotMap.liftMotor1.setPower(gamepad2.left_stick_y);
+            robotMap.liftMotor2.setPower(gamepad2.left_stick_y);
+            robotMap.reverseLiftMotor.setPower(gamepad2.left_stick_y);
+        } else if (gamepad2.left_stick_y > -rightStickDeadZone) { // DOWN
+            telemetry.addData("LIFT DOWN", gamepad2.left_stick_y);
+            robotMap.liftMotor1.setPower(gamepad2.left_stick_y);
+            robotMap.liftMotor2.setPower(gamepad2.left_stick_y);
+            robotMap.reverseLiftMotor.setPower(gamepad2.left_stick_y);
+        } else { // STAY
             robotMap.liftMotor1.setPower(0);
             robotMap.liftMotor2.setPower(0);
             robotMap.reverseLiftMotor.setPower(0);
         }
 
-        if (gamepad2.a){
+        if (gamepad2.a) {
             robotMap.intakeServo.setPosition(robotMap.INTAKE_GRAB);
         } else if (gamepad2.b) {
             robotMap.intakeServo.setPosition(robotMap.INTAKE_RELEASE);
