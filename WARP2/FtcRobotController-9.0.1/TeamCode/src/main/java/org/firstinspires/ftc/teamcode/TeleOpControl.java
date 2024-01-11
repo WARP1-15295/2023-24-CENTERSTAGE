@@ -32,8 +32,8 @@ public class TeleOpControl extends OpMode {
         double leftStickDeadZone = 0.1;
         double rightStickDeadZone = 0.1;
 
-        double x = -gamepad1.left_stick_x * Math.cos(degreesToRads45) + gamepad1.left_stick_y * Math.sin(degreesToRads45);
-        double y = -gamepad1.left_stick_y * Math.cos(degreesToRads45) + -gamepad1.left_stick_x * Math.sin(degreesToRads45);
+        double x = gamepad1.left_stick_x * Math.cos(degreesToRads45) + gamepad1.left_stick_y * Math.sin(degreesToRads45);
+        double y = -gamepad1.left_stick_y * Math.cos(degreesToRads45) + gamepad1.left_stick_x * Math.sin(degreesToRads45);
         double rotate = gamepad1.right_stick_x;
 
 
@@ -84,7 +84,9 @@ public class TeleOpControl extends OpMode {
         } else if (gamepad2.dpad_up) {
             robotMap.wristServo1.setPosition(robotMap.WRIST_STORAGE);
             robotMap.wristServo2.setPosition(robotMap.WRIST_STORAGE);
-
+        } else if (gamepad2.dpad_right) {
+            robotMap.wristServo1.setPosition(robotMap.WRIST_UP);
+            robotMap.wristServo2.setPosition(robotMap.WRIST_UP);
         }
 
     }

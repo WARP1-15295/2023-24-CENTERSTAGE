@@ -9,7 +9,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class RobotMap {
 
-    /* Public OpMode members. */
     public static DcMotor leftFrontDrive = null;
     public static DcMotor rightFrontDrive = null;
     public static DcMotor leftBackDrive = null;
@@ -25,26 +24,19 @@ public class RobotMap {
     public static Servo wristServo2 = null;
     public static Servo intakeServo = null;
 
-    public static final double INTAKE_GRAB = 0.5; //CHANGE
-    public static final double INTAKE_RELEASE = 0.0; //CHANGE
-    public static final double WRIST_SCORING = 0.7; //CHANGE
-    public static final double WRIST_STORAGE = 0.0; //CHANGE
+    public static final double INTAKE_GRAB = 0.5;
+    public static final double INTAKE_RELEASE = 0.0;
 
+    public static final double WRIST_SCORING = 0.7;
+    public static final double WRIST_STORAGE = 0.3;
+    public static final double WRIST_UP = 0.0;
 
-    public static final int WHEEL_DIAMETER = 101; //VEX 4 INCH
-    public static final double MILLIMETER_TO_INCHES_CONSTANT = 25.4;
-
-    public static final double WHEEL_CIRCUMFERENCE_INCHES = (Math.PI * WHEEL_DIAMETER) / MILLIMETER_TO_INCHES_CONSTANT; // ~ 11.13 in. IN 1120 ticks (1 Rev)
-
-    /* local OpMode members. */
     HardwareMap hardwareMap = null;
     private ElapsedTime runtime = new ElapsedTime();
 
-    /* Constructor */
     public RobotMap() {
     }
 
-    /* Initialize standard Hardware interfaces */
     public void init(HardwareMap hwMap) {
         // Save reference to Hardware map
         hardwareMap = hwMap;
@@ -92,6 +84,63 @@ public class RobotMap {
         leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+    }
 
+    public void liftForTime(double power, double seconds) {
+        runtime.reset();
+        runtime.startTime();
+
+        liftMotor1.setPower(power);
+        liftMotor2.setPower(power);
+        reverseLiftMotor.setPower(power);
+        while (runtime.seconds() <= seconds) {}
+        liftMotor1.setPower(0.0);
+        liftMotor2.setPower(0.0);
+        reverseLiftMotor.setPower(0.0);
+    }
+
+    public void driveForTime(double power, double seconds) {
+        runtime.reset();
+        runtime.startTime();
+
+        leftFrontDrive.setPower(power);
+        rightFrontDrive.setPower(power);
+        leftBackDrive.setPower(power);
+        rightBackDrive.setPower(power);
+        while (runtime.seconds() <= seconds) {}
+        leftFrontDrive.setPower(0.0);
+        rightFrontDrive.setPower(0.0);
+        leftBackDrive.setPower(0.0);
+        rightBackDrive.setPower(0.0);
+    }
+
+    public void strafeForTime(double power, double seconds) {
+        runtime.reset();
+        runtime.startTime();
+
+        leftFrontDrive.setPower(power);
+        rightFrontDrive.setPower(-power);
+        leftBackDrive.setPower(-power);
+        rightBackDrive.setPower(power);
+        while (runtime.seconds() <= seconds) {}
+        leftFrontDrive.setPower(0.0);
+        rightFrontDrive.setPower(0.0);
+        leftBackDrive.setPower(0.0);
+        rightBackDrive.setPower(0.0);
+    }
+
+    public void rotateForTime(double power, double seconds) {
+        runtime.reset();
+        runtime.startTime();
+
+        leftFrontDrive.setPower(power);
+        rightFrontDrive.setPower(-power);
+        leftBackDrive.setPower(power);
+        rightBackDrive.setPower(-power);
+        while (runtime.seconds() <= seconds) {}
+        leftFrontDrive.setPower(0.0);
+        rightFrontDrive.setPower(0.0);
+        leftBackDrive.setPower(0.0);
+        rightBackDrive.setPower(0.0);
     }
 }
